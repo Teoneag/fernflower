@@ -1,8 +1,8 @@
 ### Changes made
-- [ClassWriter.java](src/org/jetbrains/java/decompiler/main/ClassWriter.java) - isSyntheticRecordMethod: added check for synthetic constructor/getter, which is done through 2 new methods using the name, description and code of the method
-- [IFernflowerPreferences.java](IFernflowerPreferences.java) - added new option to remove synthetic constructors/getters: REMOVE_RECORD_REDUNDANT
+- [ClassWriter.java](src/org/jetbrains/java/decompiler/main/ClassWriter.java) - isSyntheticRecordMethod: added check for synthetic constructor/getter, which is done through 2 new methods using the name, description, and code of the method
+- [IFernflowerPreferences.java](IFernflowerPreferences.java) - added a new option to remove synthetic constructors/getters: REMOVE_RECORD_REDUNDANT
 - [record decompiled tests](testData/results) - modified the expected output of the record decompiled tests to remove the synthetic constructors/getters
-- [SingleClassesTest.java](test/org/jetbrains/java/decompiler/SingleClassesTest.java) - added TestRecordComplexConstructorGetter (which checks that non-synthetic constructors/getters are not removed), and and testRecordSimpleRedundant (which checks the use of the REMOVE_RECORD_REDUNDANT option)
+- [SingleClassesTest.java](test/org/jetbrains/java/decompiler/SingleClassesTest.java) - added TestRecordComplexConstructorGetter (which checks that non-synthetic constructors/getters are not removed), and testRecordSimpleRedundant (which checks the use of the REMOVE_RECORD_REDUNDANT option)
   - also added the [.java](testData/src/records/TestRecordComplexConstructorGetter.java), [.class](testData/classes/records/TestRecordComplexConstructorGetter.class) and [.dec](testData/results/TestRecordComplexConstructorGetter.dec) files for the first test
   - and the [.java](testData/src/records/TestRecordSimpleRedundant.java), [.class](testData/classes/records/TestRecordSimpleRedundant.class) and [.dec](testData/results/TestRecordSimpleRedundant.dec) files for the second test
     - I've done this manually (write class, compile it, decompile it, compare it with expected output), is there any way to build tests easily?
@@ -10,13 +10,13 @@
 ### About Fernflower
 
 Fernflower is the first actually working analytical decompiler for Java and 
-probably for a high-level programming language in general. Naturally it is still 
+probably for a high-level programming language in general. Naturally, it is still 
 under development, please send your bug reports and improvement suggestions to the
 [issue tracker](https://youtrack.jetbrains.com/newIssue?project=IDEA&clearDraft=true&c=Subsystem+Decompiler).
 
 ### Licence
 
-Fernflower is licenced under the [Apache Licence Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
+Fernflower is licensed under the [Apache Licence Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
 
 ### Running from command line
 
@@ -25,8 +25,8 @@ Fernflower is licenced under the [Apache Licence Version 2.0](http://www.apache.
 \* means 0 or more times\
 \+ means 1 or more times
 
-\<source>: file or directory with files to be decompiled. Directories are recursively scanned. Allowed file extensions are class, zip and jar.
-          Sources prefixed with -e= mean "library" files that won't be decompiled, but taken into account when analysing relationships between 
+\<source>: file or directory with files to be decompiled. Directories are recursively scanned. Allowed file extensions are class, zip, and jar.
+          Sources prefixed with -e= means "library" files that won't be decompiled, but taken into account when analyzing relationships between 
           classes or methods. Especially renaming of identifiers (s. option 'ren') can benefit from information about external classes.          
 
 \<destination>: destination directory 
