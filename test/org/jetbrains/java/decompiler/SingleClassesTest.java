@@ -41,7 +41,8 @@ public class SingleClassesTest {
                          IFernflowerPreferences.IGNORE_INVALID_BYTECODE, "1",
                          IFernflowerPreferences.VERIFY_ANONYMOUS_CLASSES, "1",
                          IFernflowerPreferences.CONVERT_PATTERN_SWITCH, "1",
-                         IFernflowerPreferences.CONVERT_RECORD_PATTERN, "1"
+                         IFernflowerPreferences.CONVERT_RECORD_PATTERN, "1",
+                         IFernflowerPreferences.REMOVE_RECORD_REDUNDANT, "1"
     ));
   }
 
@@ -177,6 +178,10 @@ public class SingleClassesTest {
   @Test public void testGenericArgs() { doTest("pkg/TestGenericArgs"); }
   @Test public void testRecordEmpty() { doTest("records/TestRecordEmpty"); }
   @Test public void testRecordSimple() { doTest("records/TestRecordSimple"); }
+  @Test public void testRecordSimpleRedundant() {
+    DecompilerContext.setProperty(IFernflowerPreferences.REMOVE_RECORD_REDUNDANT, "0");
+    doTest("records/TestRecordSimpleRedundant");
+  }
   @Test public void testRecordVararg() { doTest("records/TestRecordVararg"); }
   @Test public void testRecordGenericVararg() { doTest("records/TestRecordGenericVararg"); }
   @Test public void testRecordAnno() { doTest("records/TestRecordAnno"); }

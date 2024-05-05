@@ -281,6 +281,8 @@ public class ClassWriter {
   }
 
   private static boolean isSyntheticConstructor(StructClass cl, StructMethod mt, TextBuffer code) {
+    if (!DecompilerContext.getOption(IFernflowerPreferences.REMOVE_RECORD_REDUNDANT)) return false;
+
     if (!mt.getName().equals("<init>")) return false;
 
     String expectedDescription = "(" +
@@ -299,6 +301,8 @@ public class ClassWriter {
   }
 
   private static boolean isSyntheticGetter(StructClass cl, StructMethod mt, TextBuffer code) {
+    if (!DecompilerContext.getOption(IFernflowerPreferences.REMOVE_RECORD_REDUNDANT)) return false;
+
     List<StructRecordComponent> recordComponents = cl.getRecordComponents();
 
     for (StructRecordComponent recordComponent : recordComponents) {
