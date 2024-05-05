@@ -1,8 +1,10 @@
 ### Changes made
 - [ClassWriter.java](src/org/jetbrains/java/decompiler/main/ClassWriter.java) - isSyntheticRecordMethod: added check for synthetic constructor/getter, which is done through 2 new methods using the name, description and code of the method
+- [IFernflowerPreferences.java](IFernflowerPreferences.java) - added new option to remove synthetic constructors/getters: REMOVE_RECORD_REDUNDANT
 - [record decompiled tests](testData/results) - modified the expected output of the record decompiled tests to remove the synthetic constructors/getters
-- [SingleClassesTest.java](test/org/jetbrains/java/decompiler/SingleClassesTest.java) - added TestRecordComplexConstructorGetter, which checks that non-synthetic constructors/getters are not removed
-  - also added the [.java](testData/src/records/TestRecordComplexConstructorGetter.java), [.class](testData/classes/records/TestRecordComplexConstructorGetter.class) and [.dec](testData/results/TestRecordComplexConstructorGetter.dec) files for the new test
+- [SingleClassesTest.java](test/org/jetbrains/java/decompiler/SingleClassesTest.java) - added TestRecordComplexConstructorGetter (which checks that non-synthetic constructors/getters are not removed), and and testRecordSimpleRedundant (which checks the use of the REMOVE_RECORD_REDUNDANT option)
+  - also added the [.java](testData/src/records/TestRecordComplexConstructorGetter.java), [.class](testData/classes/records/TestRecordComplexConstructorGetter.class) and [.dec](testData/results/TestRecordComplexConstructorGetter.dec) files for the first test
+  - and the [.java](testData/src/records/TestRecordSimpleRedundant.java), [.class](testData/classes/records/TestRecordSimpleRedundant.class) and [.dec](testData/results/TestRecordSimpleRedundant.dec) files for the second test
     - I've done this manually (write class, compile it, decompile it, compare it with expected output), is there any way to build tests easily?
 
 ### About Fernflower
