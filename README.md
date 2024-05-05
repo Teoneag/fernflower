@@ -1,3 +1,10 @@
+### Changes made
+- [ClassWriter.java](src/org/jetbrains/java/decompiler/main/ClassWriter.java) - isSyntheticRecordMethod: added check for synthetic constructor/getter, which is done through 2 new methods using the name, description and code of the method
+- [record decompiled tests](testData/results) - modified the expected output of the record decompiled tests to remove the synthetic constructors/getters
+- [SingleClassesTest.java](test/org/jetbrains/java/decompiler/SingleClassesTest.java) - added TestRecordComplexConstructorGetter, which checks that non-synthetic constructors/getters are not removed
+  - also added the [.java](testData/src/records/TestRecordComplexConstructorGetter.java), [.class](testData/classes/records/TestRecordComplexConstructorGetter.class) and [.dec](testData/results/TestRecordComplexConstructorGetter.dec) files for the new test
+    - I've done this manually (write class, compile it, decompile it, compare it with expected output), is there any way to build tests easily?
+
 ### About Fernflower
 
 Fernflower is the first actually working analytical decompiler for Java and 

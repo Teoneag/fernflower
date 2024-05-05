@@ -280,6 +280,37 @@ public class ClassWriter {
     DecompilerContext.getLogger().endWriteClass();
   }
 
+  private static boolean isSyntheticConstructor(StructClass cl, StructMethod mt, TextBuffer code) {
+    if (!mt.getName().equals("<init>")) return false;
+
+    String expectedDescription = "(" +
+      cl.getRecordComponents().stream().map(StructRecordComponent::getDescriptor).collect(Collectors.joining()) + ")V";
+    if (!mt.getDescriptor().equals(expectedDescription)) return false;
+
+    List<StructRecordComponent> components = cl.getRecordComponents();
+    List<String> codeLines = code.toString().lines().toList();
+    if (components.size() != codeLines.size()) return false;
+    for (int i = 0; i < components.size(); i++) {
+      StructRecordComponent component = components.get(i);
+      String codeLine = codeLines.get(i).trim();
+      if (!codeLine.equals("this." + component.getName() + " = " + component.getName() + ";")) return false;
+    }
+    return true;
+  }
+
+  private static boolean isSyntheticGetter(StructClass cl, StructMethod mt, TextBuffer code) {
+    List<StructRecordComponent> recordComponents = cl.getRecordComponents();
+
+    for (StructRecordComponent recordComponent : recordComponents) {
+      if (mt.getName().equals(recordComponent.getName())) {
+        if (!mt.getDescriptor().equals("()" + recordComponent.getDescriptor())) return false;
+        String codeLine = code.toString().trim();
+        return codeLine.equals("return this." + mt.getName() + ";");
+      }
+    }
+    return false;
+  }
+
   @SuppressWarnings("SpellCheckingInspection")
   private static boolean isSyntheticRecordMethod(StructClass cl, StructMethod mt, TextBuffer code) {
     if (cl.getRecordComponents() != null) {
@@ -292,6 +323,7 @@ public class ClassWriter {
           return str.startsWith("return this." + name + "<invokedynamic>(this");
         }
       }
+      return isSyntheticConstructor(cl, mt, code) || isSyntheticGetter(cl, mt, code);
     }
     return false;
   }

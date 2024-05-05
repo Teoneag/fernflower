@@ -1,0 +1,66 @@
+package records;
+
+public record TestRecordComplexConstructorGetter(int x, int y, int z, int w) {
+   public TestRecordComplexConstructorGetter(int x, int y, int z, int w) {
+      this.x = y;// 8
+      this.y = x;// 9
+      this.z = z;// 10
+      this.w = w;// 11
+   }// 12
+
+   public int getX() {
+      return this.x + 1;// 18
+   }
+
+   public int getY() {
+      System.out.println("This extra line makes the getter special");// 25
+      return this.y;// 26
+   }
+
+   public int getW() {
+      return this.w;// 35
+   }
+}
+
+class 'records/TestRecordComplexConstructorGetter' {
+   method '<init> (IIII)V' {
+      6      4
+      b      5
+      10      6
+      16      7
+      19      8
+   }
+
+   method 'getX ()I' {
+      1      11
+      4      11
+      5      11
+      6      11
+   }
+
+   method 'getY ()I' {
+      0      15
+      3      15
+      5      15
+      9      16
+      c      16
+   }
+
+   method 'getW ()I' {
+      1      20
+      4      20
+   }
+}
+
+Lines mapping:
+8 <-> 5
+9 <-> 6
+10 <-> 7
+11 <-> 8
+12 <-> 9
+18 <-> 12
+25 <-> 16
+26 <-> 17
+35 <-> 21
+Not mapped:
+7
