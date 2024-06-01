@@ -1,3 +1,8 @@
+### Task for JetBrains Internship 2024 - Configuration modes for Java decompiler
+
+Change FernFlower in such a way that it doesn't generate the redundant constructor and accessors for record classes.
+Bonus Task: hide this functionality behind an option that can be passed through the CLI (check IFernflowerPreferences).
+
 ### Changes made
 - [ClassWriter.java](src/org/jetbrains/java/decompiler/main/ClassWriter.java) - isSyntheticRecordMethod: added check for synthetic constructor/getter, which is done through 2 new methods using the name, description, and code of the method
 - [IFernflowerPreferences.java](IFernflowerPreferences.java) - added a new option to remove synthetic constructors/getters: REMOVE_RECORD_REDUNDANT
